@@ -17,3 +17,5 @@ print(apple_stock.tail(10))
 
 print(apple_stock.isnull())
 print(apple_stock.isnull().sum())
+
+
