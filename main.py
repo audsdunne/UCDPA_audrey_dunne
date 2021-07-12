@@ -1,4 +1,6 @@
 # Import external libraries required
+import statistics
+
 import pandas as pd
 import numpy as np
 import datetime
@@ -8,8 +10,7 @@ import seaborn as sns
 # Import data files
 apple_stock = pd.read_csv("AAPL_Montly_updates.csv")
 
-# Understand different attributes of the dataset
-
+# Check for missing or N/A values
 print(apple_stock.isnull())
 print(apple_stock.isnull().sum())
 
@@ -23,12 +24,6 @@ print(closing_price)
 min_closing_price = min(closing_price)
 print(min_closing_price)
 
-# Identify min closing stock value index
-min_index = closing_price.index(min_closing_price)
-print(min_index)
-
-# Identify the month with the minimum closing stock value
-
-months = (apple_stock["Date"])
-min_month = months[min_index]
-print(min_month)
+# Calculate the average closing stock value
+average_closing_price = statistics.mean(closing_price)
+print(average_closing_price)
