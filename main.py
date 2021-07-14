@@ -42,3 +42,4 @@ print(h12020_apple.isnull().sum())
 
 # Analysis
 
+
