@@ -32,38 +32,22 @@ print(closing_price)
 min_closing_price = min(closing_price)
 print(min_closing_price)
 
-# Calculate the average closing stock value
-average_closing_price = statistics.mean(closing_price)
-print(average_closing_price)
-
-# Gain valuable insights
-
-# Identify Minimum Closing Stock Value
-closing_price = (apple_stock["Adj Close"])
-print(closing_price)
-
-min_closing_price = min(closing_price)
-print(min_closing_price)
-
 # Identify min closing stock value index
 min_index = closing_price.index(min_closing_price)
 print(min_index)
 
 # Identify the month with the minimum closing stock value
-
 months = (apple_stock["Date"])
 min_month = months[min_index]
 print(min_month)
 
-# Gain valuable insights
-
-# Identify Minimum Closing Stock Value
-closing_price = (apple_stock["Adj Close"])
-print(closing_price)
-
-min_closing_price = min(closing_price)
-print(min_closing_price)
-
 # Calculate the average closing stock value
 average_closing_price = statistics.mean(closing_price)
 print(average_closing_price)
+
+# Check for duplicates
+contains_duplicates = any(date.count(element))
+print(contains_duplicates)
+
+apple_stock_final = list(set(date))
+print(apple_stock_final)

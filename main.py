@@ -14,21 +14,21 @@ apple_stock_daily = pd.read_csv("AAPL_daily_update.csv")
 # Combine 3 apple stock datasets and merge to one dataset
 apple_stock = pd.concat([apple_stock_daily, apple_stock_weekly, apple_stock_monthly], axis = 0)
 
-# Check for missing or N/A values
-print(apple_stock.isnull())
-print(apple_stock.isnull().sum())
+# Assign values to lists in dataset
+date = apple_stock["Date"]
+open = apple_stock["Open"]
+high = apple_stock["High"]
+low = apple_stock["Low"]
+close = apple_stock["Close"]
+adj_Close = apple_stock["Adj Close"]
+volume = apple_stock["Volume"]
 
-
-
-
-# Stop
-
-print(apple_stock.shape)
-print(apple_stock.info())
-print(apple_stock.describe().transpose)
-print(apple_stock.head(10))
-print(apple_stock.tail(10))
+# Sort values by closing stock by ascending
+sorted_closing_stock = apple_stock_daily["Adj Close"].sort()
+print(sorted_closing_stock)
 
 # Check for missing or N/A values
 print(apple_stock.isnull())
 print(apple_stock.isnull().sum())
+
+
