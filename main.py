@@ -7,28 +7,38 @@ import seaborn as sns
 import statistics
 
 # Import data files
-apple_stock_monthly = pd.read_csv("AAPL_Montly_updates.csv")
-apple_stock_weekly = pd.read_csv("AAPL_weekly_update.csv")
-apple_stock_daily = pd.read_csv("AAPL_daily_update.csv")
+apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
+print(apple_stock.head(5))
 
-# Combine 3 apple stock datasets and merge to one dataset
-apple_stock = pd.concat([apple_stock_daily, apple_stock_weekly, apple_stock_monthly], axis = 0)
+# Create a new column with month of date
+apple_stock['month'] = pd.DatetimeIndex(apple_stock['Date']).month
+# Create a new column with year of date
+apple_stock['year'] = pd.DatetimeIndex(apple_stock['Date']).year
+# Create a new column with month and year of date
+apple_stock['month_year'] = pd.to_datetime(apple_stock['Date']).dt.to_period('M')
+print(apple_stock.tail(10))
 
-# Assign values to lists in dataset
-date = apple_stock["Date"]
-open = apple_stock["Open"]
-high = apple_stock["High"]
-low = apple_stock["Low"]
-close = apple_stock["Close"]
-adj_Close = apple_stock["Adj Close"]
-volume = apple_stock["Volume"]
+# Sort data based on volume
+apple_stock_sorted = apple_stock.sort_values(["Adj Close"],ascending=False)
+print(apple_stock_sorted.head(10))
 
-# Sort values by closing stock by ascending
-sorted_closing_stock = apple_stock_daily["Adj Close"].sort()
-print(sorted_closing_stock)
+# Group by Month_Year
+apple_stock.groupby("month_year")
+print(apple_stock.groupby("month_year").groups)
+
+# Filter dataset by H1 2020 only
+month_year = apple_stock["month_year"]
+start_date = "2020-01"
+end_date = "2020-06"
+after_start_date = month_year >= start_date
+before_end_date = month_year <= end_date
+between_two_dates = after_start_date & before_end_date
+h12020_apple = apple_stock.loc[between_two_dates]
+print(h12020_apple.head(10))
 
 # Check for missing or N/A values
-print(apple_stock.isnull())
-print(apple_stock.isnull().sum())
+print(h12020_apple.isnull())
+print(h12020_apple.isnull().sum())
 
+# Analysis
 
