@@ -14,7 +14,6 @@ low = apple_stock["Low"]
 close = apple_stock["Close"]
 adj_Close = apple_stock["Adj Close"]
 volume = apple_stock["Volume"]
-
 print(volume)
 
 # Check for duplicates
