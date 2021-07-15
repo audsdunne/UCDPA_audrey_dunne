@@ -5,6 +5,7 @@ import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statistics
+import requests
 
 # Import data files
 apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
@@ -40,6 +41,17 @@ print(h12020_apple.head(10))
 print(h12020_apple.isnull())
 print(h12020_apple.isnull().sum())
 
-# Analysis
+# Retrieve data from online API
+url = 'https://www.alphavantage.co/query?function=EARNINGS&symbol=aapl&apikey==XCHDP0ZBLSGMS7HD'
+r = requests.get(url)
+apple_earnings = r.json()
+print(apple_earnings)
+
+# Gain valuable insights
+# Calculate the average closing stock value
+average_closing_price = statistics.mean(h12020_apple['Close'])
+print(average_closing_price)
+
+
 
 
