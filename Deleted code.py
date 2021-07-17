@@ -63,3 +63,9 @@ print(apple_stock.tail(10))
 #
 h12020_apple.groupby("month")["Close"].mean()
 h12020_apple.pivot_table(values="Close", index="month", aggfunc=np.median)
+
+
+# Iterate through each row and select
+# 'Name' and 'Close' column respectively.
+for ind in telecoms_stock.index:
+    print(telecoms_stock['Date'][ind], telecoms_stock['Close'][ind])

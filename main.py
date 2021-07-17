@@ -132,3 +132,10 @@ print(h12020_samsung.tail(10))
 telecoms_stock = pd.concat([h12020_apple, h12020_samsung], axis = 0)
 print(telecoms_stock.head(5))
 print(telecoms_stock.tail(5))
+
+# Using looping and iterrows on dataframe
+for index, row in telecoms_stock.iterrows():
+    print (row["Date"], row["Close"])
+
+
+
