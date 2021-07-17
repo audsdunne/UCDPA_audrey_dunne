@@ -12,7 +12,6 @@ apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
 print(apple_stock.head(5))
 
 # Insert new column called Stock Name
-apple_stock.assign(Name='abc')
 apple_stock['Name'] = "APPL"
 
 # Count missing values in each column
@@ -89,3 +88,24 @@ print(max_day)
 # Identify the day which had the lowest close in H1 2020
 min_day = (h12020_apple[h12020_apple.Close == h12020_apple.Close.min()])
 print(min_day)
+
+# Import Samsung dataset and create H1 2020 data only (as per Apple)
+samsung_stock = pd.read_csv("Datasets/samsung.csv")
+samsung_stock['Name'] = "SAMS"
+samsung_stock['month'] = pd.DatetimeIndex(samsung_stock['Date']).month
+samsung_stock['year'] = pd.DatetimeIndex(samsung_stock['Date']).year
+samsung_stock['month_year'] = pd.to_datetime(samsung_stock['Date']).dt.to_period('M')
+month_year = samsung_stock["month_year"]
+start_date = "01/01/2020"
+end_date = "30/06/2020"
+after_start_date = month_year >= start_date
+before_end_date = month_year <= end_date
+between_two_dates = after_start_date & before_end_date
+h12020_samsung = samsung_stock.loc[between_two_dates]
+print(h12020_samsung.tail(10))
+
+# Merge Apple and Samsung Dataframes
+telecoms_stock = pd.concat([h12020_apple, h12020_samsung], axis = 0)
+print(telecoms_stock.head(5))
+print(telecoms_stock.tail(5))
+
