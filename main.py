@@ -89,6 +89,30 @@ print(max_day)
 min_day = (h12020_apple[h12020_apple.Close == h12020_apple.Close.min()])
 print(min_day)
 
+# Create a chart showing the history of Apple closing stock price  over H12020
+x = h12020_apple['Date']
+y = h12020_apple["Close"]
+plt.plot(x, y, marker="s", linestyle="--", color="cyan")
+plt.xlabel("Date")
+plt.ylabel("Closing Stock €")
+plt.title("H1 2020 Apple Closing Stock Value")
+plt.show()
+
+# Create a chart showing June 2020 data only
+month_year = h12020_apple["month_year"]
+start_date = "2020-06"
+end_date = "2020-06"
+after_start_date = month_year >= start_date
+before_end_date = month_year <= end_date
+between_two_dates = after_start_date & before_end_date
+Jun20_apple = h12020_apple.loc[between_two_dates]
+x = Jun20_apple['Date']
+y1 = Jun20_apple["High"]
+y2 = Jun20_apple["Low"]
+plt.plot(x, y1, marker="^", linestyle=":", color="hotpink")
+plt.plot(x, y2, marker="P", linestyle="--", color="cyan")
+plt.show()
+
 # Import Samsung dataset and create H1 2020 data only (as per Apple)
 samsung_stock = pd.read_csv("Datasets/samsung.csv")
 samsung_stock['Name'] = "SAMS"
@@ -108,4 +132,3 @@ print(h12020_samsung.tail(10))
 telecoms_stock = pd.concat([h12020_apple, h12020_samsung], axis = 0)
 print(telecoms_stock.head(5))
 print(telecoms_stock.tail(5))
-
