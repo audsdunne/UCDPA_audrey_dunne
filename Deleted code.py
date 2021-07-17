@@ -58,3 +58,8 @@ print(apple_stock.columns)
 print(apple_stock.index)
 print(apple_stock.head(10))
 print(apple_stock.tail(10))
+
+
+#
+h12020_apple.groupby("month")["Close"].mean()
+h12020_apple.pivot_table(values="Close", index="month", aggfunc=np.median)

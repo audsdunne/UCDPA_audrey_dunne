@@ -7,11 +7,8 @@ import seaborn as sns
 import statistics
 
 # Import data files
-apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
+apple = pd.read_csv("Datasets/AAPL_daily_update.csv")
+apple_stock = np.array(apple)
+
+
 print(apple_stock)
-
-# Sort data based on volume
-apple_stock_sorted = apple_stock.sort_values(["Adj Close"])
-print(apple_stock_sorted.head(10))
-
-

@@ -11,6 +11,10 @@ import requests
 apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
 print(apple_stock.head(5))
 
+# Insert new column called Stock Name
+apple_stock.assign(Name='abc')
+apple_stock['Name'] = "APPL"
+
 # Count missing values in each column
 missing_values_count = apple_stock.isnull().sum
 print(missing_values_count)
@@ -53,6 +57,11 @@ between_two_dates = after_start_date & before_end_date
 h12020_apple = apple_stock.loc[between_two_dates]
 print(h12020_apple.head(10))
 
+# Create an array from H1 Data
+h120_apple = np.array(h12020_apple)
+print(h120_apple)
+print(type(h120_apple))
+
 # Retrieve data from online API
 url = 'https://www.alphavantage.co/query?function=EARNINGS&symbol=aapl&apikey==XCHDP0ZBLSGMS7HD'
 r = requests.get(url)
@@ -72,3 +81,11 @@ print(min_closing_price)
 # Identify maximum closing stock value for H1 2020
 max_closing_price = max(closing_price)
 print(max_closing_price)
+
+# Identify the day which had the highest close in H1 2020
+max_day = (h12020_apple[h12020_apple.Close == h12020_apple.Close.max()])
+print(max_day)
+
+# Identify the day which had the lowest close in H1 2020
+min_day = (h12020_apple[h12020_apple.Close == h12020_apple.Close.min()])
+print(min_day)
