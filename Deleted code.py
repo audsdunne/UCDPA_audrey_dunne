@@ -30,12 +30,7 @@ apple_stock_daily = pd.read_csv("Datasets/AAPL_daily_update.csv")
 
 # Gain valuable insights
 
-# Identify Minimum Closing Stock Value
-closing_price = (apple_stock["Adj Close"])
-print(closing_price)
 
-min_closing_price = min(closing_price)
-print(min_closing_price)
 
 # Identify min closing stock value index
 min_index = closing_price.index(min_closing_price)
@@ -58,5 +53,8 @@ print(apple_stock_final)
 print(apple_stock.shape)
 print(apple_stock.info())
 print(apple_stock.describe().transpose)
+print(apple_stock.values)
+print(apple_stock.columns)
+print(apple_stock.index)
 print(apple_stock.head(10))
 print(apple_stock.tail(10))

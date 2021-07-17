@@ -11,6 +11,14 @@ import requests
 apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
 print(apple_stock.head(5))
 
+# Count missing values in each column
+missing_values_count = apple_stock.isnull().sum
+print(missing_values_count)
+
+# Drop duplicate rows based on column date
+drop_duplicates = apple_stock.drop_duplicates(subset=['Date'])
+print(apple_stock.shape,drop_duplicates.shape)
+
 # Create a new column with month of date
 apple_stock['month'] = pd.DatetimeIndex(apple_stock['Date']).month
 # Create a new column with year of date
@@ -18,6 +26,14 @@ apple_stock['year'] = pd.DatetimeIndex(apple_stock['Date']).year
 # Create a new column with month and year of date
 apple_stock['month_year'] = pd.to_datetime(apple_stock['Date']).dt.to_period('M')
 print(apple_stock.tail(10))
+
+# Understand different attributes of the dataset
+print(apple_stock.shape)
+print(apple_stock.info())
+print(apple_stock.describe().transpose)
+print(apple_stock.values)
+print(apple_stock.columns)
+print(apple_stock.index)
 
 # Sort data based on volume
 apple_stock_sorted = apple_stock.sort_values(["Adj Close"],ascending=False)
@@ -37,10 +53,6 @@ between_two_dates = after_start_date & before_end_date
 h12020_apple = apple_stock.loc[between_two_dates]
 print(h12020_apple.head(10))
 
-# Check for missing or N/A values
-print(h12020_apple.isnull())
-print(h12020_apple.isnull().sum())
-
 # Retrieve data from online API
 url = 'https://www.alphavantage.co/query?function=EARNINGS&symbol=aapl&apikey==XCHDP0ZBLSGMS7HD'
 r = requests.get(url)
@@ -48,11 +60,15 @@ apple_earnings = r.json()
 print(apple_earnings)
 
 # Gain valuable insights
-# Calculate the average closing stock value
+# Calculate the average closing stock value for H1 2020
 average_closing_price = statistics.mean(h12020_apple['Close'])
 print(average_closing_price)
 
+# Identify Minimum closing stock value for H1 2020
+closing_price = (h12020_apple["Close"])
+min_closing_price = min(closing_price)
+print(min_closing_price)
 
-
-
-
+# Identify maximum closing stock value for H1 2020
+max_closing_price = max(closing_price)
+print(max_closing_price)
