@@ -138,4 +138,3 @@ print(telecoms_stock.tail(5))
 # Using looping and iterrows on dataframe
 for index, row in telecoms_stock.iterrows():
     print(row["Date"], row["Close"])
-
