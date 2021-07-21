@@ -1,15 +1,14 @@
 # Import external libraries required
 import pandas as pd
 import numpy as np
-import datetime
 import matplotlib.pyplot as plt
-import seaborn as sns
 import statistics
 import requests
 
 # Import data files
 apple_stock = pd.read_csv("Datasets/AAPL_daily_update.csv")
 print(apple_stock.head(5))
+
 
 # Insert new column called Stock Name
 apple_stock['Name'] = "APPL"
@@ -20,7 +19,7 @@ print(missing_values_count)
 
 # Drop duplicate rows based on column date
 drop_duplicates = apple_stock.drop_duplicates(subset=['Date'])
-print(apple_stock.shape,drop_duplicates.shape)
+print(apple_stock.shape, drop_duplicates.shape)
 
 # Create a new column with month of date
 apple_stock['month'] = pd.DatetimeIndex(apple_stock['Date']).month
@@ -39,7 +38,7 @@ print(apple_stock.columns)
 print(apple_stock.index)
 
 # Sort data based on volume
-apple_stock_sorted = apple_stock.sort_values(["Adj Close"],ascending=False)
+apple_stock_sorted = apple_stock.sort_values(["Adj Close"], ascending=False)
 print(apple_stock_sorted.head(10))
 
 # Group by Month_Year
@@ -111,6 +110,9 @@ y1 = Jun20_apple["High"]
 y2 = Jun20_apple["Low"]
 plt.plot(x, y1, marker="^", linestyle=":", color="hotpink")
 plt.plot(x, y2, marker="P", linestyle="--", color="cyan")
+plt.xlabel("Date")
+plt.ylabel("High Stock Value € / Low Stock Value €")
+plt.title("June 2020 Apple Stock Value")
 plt.show()
 
 # Import Samsung dataset and create H1 2020 data only (as per Apple)
@@ -129,13 +131,11 @@ h12020_samsung = samsung_stock.loc[between_two_dates]
 print(h12020_samsung.tail(10))
 
 # Merge Apple and Samsung Dataframes
-telecoms_stock = pd.concat([h12020_apple, h12020_samsung], axis = 0)
+telecoms_stock = pd.concat([h12020_apple, h12020_samsung], axis=0)
 print(telecoms_stock.head(5))
 print(telecoms_stock.tail(5))
 
 # Using looping and iterrows on dataframe
 for index, row in telecoms_stock.iterrows():
-    print (row["Date"], row["Close"])
-
-
+    print(row["Date"], row["Close"])
 

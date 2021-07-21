@@ -7,8 +7,7 @@ import seaborn as sns
 import statistics
 
 # Import data files
-apple = pd.read_csv("Datasets/AAPL_daily_update.csv")
-apple_stock = np.array(apple)
+samsung_stock = pd.read_csv("Datasets/samsung.csv")
+print(samsung_stock.head(5))
 
 
-print(apple_stock)
